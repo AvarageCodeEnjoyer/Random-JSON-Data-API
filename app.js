@@ -2,14 +2,13 @@ const express = require('express');
 const app = express();
 
 // Define a route that returns random JSON data
-app.get('/', (req, res) => {
-  const randomData = generateRandomData();
+app.get('/', async (req, res) => {
+  const randomData = await generateRandomData();
   res.json(randomData);
-  console.log(randomData)
 });
 
 // Function to generate random data
-function generateRandomData() {
+async function generateRandomData() {
   const randomValue = Math.random();
   const randomObject = {
     id: Math.floor(Math.random() * 1000),
@@ -26,14 +25,14 @@ function generateRandomData() {
     quantity: Math.floor(Math.random() * 10),
     imageUrl: `https://example.com/image-${Math.floor(Math.random() * 10)}.jpg`,
     manufacturer: ['BrandA', 'BrandB', 'BrandC'][Math.floor(Math.random() * 3)],
-    releaseDate: getRandomDate(),
+    releaseDate: await getRandomDate(),
     countryOfOrigin: ['USA', 'China', 'Germany', 'Japan'][Math.floor(Math.random() * 4)],
   };
   return randomObject;
 }
 
 // Function to generate a random date within the last year
-function getRandomDate() {
+async function getRandomDate() {
   const currentDate = new Date();
   const pastDate = new Date(currentDate.getTime() - Math.random() * 365 * 24 * 60 * 60 * 1000);
   return pastDate.toISOString().split('T')[0];
