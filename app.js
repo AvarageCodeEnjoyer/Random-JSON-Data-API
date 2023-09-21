@@ -3,8 +3,8 @@ const app = express();
 
 // Define a route that returns random JSON data
 app.get('/', async (req, res) => {
-  const randomData = await generateRandomData().json()
-  res.send(randomData);
+  const randomData = await generateRandomData()
+  res.json(randomData);
 });
 
 app.get('/sayHello', async (req, res) => {
